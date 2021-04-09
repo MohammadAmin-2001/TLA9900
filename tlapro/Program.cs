@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace tlapro
 {
@@ -8,6 +10,7 @@ namespace tlapro
         {
 
             int i = 0;
+           
             string[] States=Console.ReadLine().Split(',');
             string[] Alphabet = Console.ReadLine().Split(',');
             string[] FinalState = Console.ReadLine().Split(',');
@@ -18,22 +21,32 @@ namespace tlapro
             }
             NFA.maping.Add(" ", i);
             NFA.InitialState = States[0];
+            NFA.Alphabet = Alphabet;
+            NFA.final = FinalState;
+            for (int r = 0; r < States.Length; r++)
+            {
+                NFA.StateS.Add(new State (States[r]));
+            }
             for (int j = 1; j <= Transfers; j++)
             {
                 
                 string[] delta = Console.ReadLine().Split(',');
                 var help = ishere(delta[0]);
-                if (NFA.StateS.Count == 0||help==null)
+                var help2 = ishere(delta[1]);
+                if(help.deltafunction[NFA.maping[delta[2]]]==null)
                 {
-                    NFA.StateS.Add(new State(delta[0], delta[1], NFA.maping[delta[2]]));
+                    help.deltafunction[NFA.maping[delta[2]]]=new List<State>();
+                    help.deltafunction[NFA.maping[delta[2]]].Add(help2);
+
                 }
                 else
                 {
-                    help.adding(delta[1], NFA.maping[delta[2]]);
-                    
+                    help.deltafunction[NFA.maping[delta[2]]].Add(help2);
                 }
+
                 
             }
+            Console.WriteLine( NFA.isAcceptByNFA());
             
         }
         static State ishere(string here)
