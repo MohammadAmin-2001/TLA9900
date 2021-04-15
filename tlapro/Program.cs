@@ -46,7 +46,7 @@ namespace tlapro
 
                 
             }
-            Console.WriteLine( NFA.isAcceptByNFA());
+            
             
         }
         static State ishere(string here)
