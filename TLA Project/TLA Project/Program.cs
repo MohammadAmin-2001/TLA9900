@@ -44,7 +44,20 @@ namespace TLA_Project
                     help.deltafunction[NFA.maping[delta[2]]].Add(help2);
                 }
 
-
+                //added by ali for findRegExp method
+                var state1 = ishere(delta[0]);
+                var state2 = ishere(delta[1]);
+                if (delta[2] == " ") delta[2] = "λ";
+                if (state1.OutV.ContainsKey(state2))
+                {
+                    state1.OutV[state2] = state1.OutV[state2] + "+" + delta[2];
+                }
+                else
+                {
+                    state1.OutV.Add(state2, delta[2]);
+                    state2.InV.Add(state1, delta[2]);
+                }
+                //
             }
 
 

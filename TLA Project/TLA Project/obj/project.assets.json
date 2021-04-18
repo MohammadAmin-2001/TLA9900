@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\Desktop\\tlaProject\\TLA Project\\TLA Project\\TLA Project.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\TLA Project\\TLA Project\\TLA Project.csproj",
       "projectName": "TLA Project",
-      "projectPath": "C:\\Users\\hp\\Desktop\\tlaProject\\TLA Project\\TLA Project\\TLA Project.csproj",
+      "projectPath": "C:\\Users\\hp\\Desktop\\TLA Project\\TLA Project\\TLA Project.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\Desktop\\tlaProject\\TLA Project\\TLA Project\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Desktop\\TLA Project\\TLA Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

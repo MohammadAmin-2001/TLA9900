@@ -69,6 +69,35 @@ namespace TLA_Project
         {
 
         }
+        private void findRegExp()
+        {
+            List<State> StateCopy = new List<State>();
+
+            foreach(State state in StateS)//making a copy of each state and put in StateCopy
+            {
+                State temp = new State(state.NameState);
+                foreach(var x in state.InV)
+                {
+                    temp.InV.Add(x.Key, x.Value);
+                }
+                foreach (var x in state.OutV)
+                {
+                    temp.OutV.Add(x.Key, x.Value);
+                }
+                StateCopy.Add(temp);
+            }
+
+            State finalState = new State("final");
+            StateCopy.Add(finalState);
+            foreach (State x in StateCopy) if (x.NameState.isfinal()) x.OutV.Add(finalState, "λ");//در آوردن استیت از حالت پایانی
+
+            State firstState = new State("first");
+            firstState.OutV.Add(StateCopy[0], "λ");
+            StateCopy.Insert(0, firstState);
+
+
+
+        }
         private void addtostack(IEnumerable s)
         {
             foreach (var item in s)

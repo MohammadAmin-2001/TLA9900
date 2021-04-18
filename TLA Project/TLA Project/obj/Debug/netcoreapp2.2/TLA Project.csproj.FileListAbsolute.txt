@@ -9,14 +9,3 @@ C:\Users\hp\Desktop\TLA_Project\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\
 C:\Users\hp\Desktop\TLA_Project\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.AssemblyInfo.cs
 C:\Users\hp\Desktop\TLA_Project\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.dll
 C:\Users\hp\Desktop\TLA_Project\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.pdb
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\bin\Debug\netcoreapp2.2\TLA Project.deps.json
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\bin\Debug\netcoreapp2.2\TLA Project.runtimeconfig.json
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\bin\Debug\netcoreapp2.2\TLA Project.runtimeconfig.dev.json
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\bin\Debug\netcoreapp2.2\TLA Project.dll
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\bin\Debug\netcoreapp2.2\TLA Project.pdb
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.csprojAssemblyReference.cache
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.csproj.CoreCompileInputs.cache
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.AssemblyInfoInputs.cache
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.AssemblyInfo.cs
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.dll
-C:\Users\hp\Desktop\tlaProject\TLA Project\TLA Project\obj\Debug\netcoreapp2.2\TLA Project.pdb
