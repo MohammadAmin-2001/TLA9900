@@ -4,20 +4,20 @@ using System.Collections;
 using System.Text;
 using System.Linq;
 
-namespace tlapro
+namespace TLA_Project
 {
     class NFA
     {
         public static string InitialState;
         public static string[] Alphabet;
         public static string[] final;
-        static Stack<object> stack_help = new Stack<object>(); 
+        static Stack<object> stack_help = new Stack<object>();
         public static Dictionary<string, int> maping = new Dictionary<string, int>();
         public static List<State> StateS = new List<State>();
         private bool isAcceptByNFA()
         {
             string Tape_String = Console.ReadLine().ToLower();
-            if((Tape_String.Length==0&&InitialState.isfinal()))
+            if ((Tape_String.Length == 0 && InitialState.isfinal()))
             {
                 return true;
             }
@@ -28,19 +28,19 @@ namespace tlapro
             else
             {
                 char[] tape_arr = Tape_String.ToCharArray();
-                List<char> tape_list = tape_arr.ToList();   
+                List<char> tape_list = tape_arr.ToList();
                 State now = StateS[0];
-                while(tape_list.Count!=0)
+                while (tape_list.Count != 0)
                 {
-                  if(now.deltafunction[maping[tape_list[0].ToString()]]!=null)
-                   {
+                    if (now.deltafunction[maping[tape_list[0].ToString()]] != null)
+                    {
 
                         List<State> ss = now.deltafunction[maping[tape_list[0].ToString()]];
                         addtostack(ss);
                         now = (State)stack_help.Pop();
                         tape_list.RemoveAt(0);
                     }
-                  else if(now.deltafunction[maping[" "]] != null)
+                    else if (now.deltafunction[maping[" "]] != null)
                     {
                         List<State> ss = now.deltafunction[maping[" "]];
                         addtostack(ss);
@@ -49,27 +49,27 @@ namespace tlapro
                     }
                     else
                     {
-                        now =(State)stack_help.Pop();
+                        now = (State)stack_help.Pop();
                     }
                 }
-                
-                   if(final.Any(x=>x==now.NameState))
+
+                if (final.Any(x => x == now.NameState))
                 {
                     return true;
                 }
 
 
                 return false;
-                
+
 
             }
-           
+
         }
         private void createEquivalentDFA()
         {
 
         }
-        private void addtostack( IEnumerable s)
+        private void addtostack(IEnumerable s)
         {
             foreach (var item in s)
             {
@@ -108,5 +108,5 @@ namespace tlapro
             return false;
         }
     }
+    
 }
-

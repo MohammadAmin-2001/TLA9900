@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace tlapro
+namespace TLA_Project
 {
     class Program
     {
@@ -10,14 +10,14 @@ namespace tlapro
         {
 
             int i = 0;
-           
-            string[] States=Console.ReadLine().Split(',');
+
+            string[] States = Console.ReadLine().Split(',');
             string[] Alphabet = Console.ReadLine().Split(',');
             string[] FinalState = Console.ReadLine().Split(',');
             int Transfers = int.Parse(Console.ReadLine());
-            for ( i = 0; i < Alphabet.Length; i++)
+            for (i = 0; i < Alphabet.Length; i++)
             {
-                NFA.maping.Add(Alphabet[i],i);
+                NFA.maping.Add(Alphabet[i], i);
             }
             NFA.maping.Add(" ", i);
             NFA.InitialState = States[0];
@@ -25,17 +25,17 @@ namespace tlapro
             NFA.final = FinalState;
             for (int r = 0; r < States.Length; r++)
             {
-                NFA.StateS.Add(new State (States[r]));
+                NFA.StateS.Add(new State(States[r]));
             }
             for (int j = 1; j <= Transfers; j++)
             {
-                
+
                 string[] delta = Console.ReadLine().Split(',');
                 var help = ishere(delta[0]);
                 var help2 = ishere(delta[1]);
-                if(help.deltafunction[NFA.maping[delta[2]]]==null)
+                if (help.deltafunction[NFA.maping[delta[2]]] == null)
                 {
-                    help.deltafunction[NFA.maping[delta[2]]]=new List<State>();
+                    help.deltafunction[NFA.maping[delta[2]]] = new List<State>();
                     help.deltafunction[NFA.maping[delta[2]]].Add(help2);
 
                 }
@@ -44,10 +44,10 @@ namespace tlapro
                     help.deltafunction[NFA.maping[delta[2]]].Add(help2);
                 }
 
-                
+
             }
-            
-            
+
+
         }
         static State ishere(string here)
         {
@@ -58,8 +58,8 @@ namespace tlapro
                     return item;
             }
             return null;
-           
+
         }
-        
+
     }
 }

@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tlapro
+namespace TLA_Project
 {
-    class DFA:NFA
-
+    class DFA: NFA
     {
-       
     }
 }
-
