@@ -14,6 +14,12 @@ namespace TLA_Project
         static Stack<object> stack_help = new Stack<object>();
         public static Dictionary<string, int> maping = new Dictionary<string, int>();
         public static List<State> StateS = new List<State>();
+
+        public NFA()
+        {
+            findRegExp();
+        }
+
         private bool isAcceptByNFA()
         {
             string Tape_String = Console.ReadLine().ToLower();
@@ -71,32 +77,114 @@ namespace TLA_Project
         }
         private void findRegExp()
         {
-            List<State> StateCopy = new List<State>();
-
-            foreach(State state in StateS)//making a copy of each state and put in StateCopy
+           // try
             {
-                State temp = new State(state.NameState);
-                foreach(var x in state.InV)
+                List<State> StateCopy = new List<State>();
+                for (int i = 0; i < StateS.Count; i++)//making a copy of each state and put in StateCopy
                 {
-                    temp.InV.Add(x.Key, x.Value);
+                    StateCopy.Add(new State(StateS[i].NameState));
                 }
-                foreach (var x in state.OutV)
+                for (int i = 0; i < StateS.Count; i++)
                 {
-                    temp.OutV.Add(x.Key, x.Value);
+                    State temp = StateCopy[i];
+                    for (int j = 0; j < StateS[i].InV.Count; j++) 
+                    {
+                        var x = StateS[i].InV.ElementAt(j);
+                        int k;
+                        for (k = 0; k < StateS.Count; k++) if (x.Key.NameState == StateCopy[k].NameState) break;
+                        temp.InV.Add(StateCopy[k], x.Value);
+                    }
+                    for (int j = 0; j < StateS[i].OutV.Count; j++)
+                    {
+                        var x = StateS[i].OutV.ElementAt(j);
+                        int k;
+                        for (k = 0; k < StateS.Count; k++) if (x.Key.NameState == StateCopy[k].NameState) break;
+                        temp.OutV.Add(StateCopy[k], x.Value);
+                    }
+                    //StateCopy.Add(temp);
                 }
-                StateCopy.Add(temp);
+
+                State finalState = new State("final");
+                StateCopy.Add(finalState);
+                for(int i = 0; i < StateCopy.Count; i++)
+                    if (StateCopy[i].NameState.isfinal())
+                    {
+                        StateCopy[i].OutV.Add(finalState, "λ");//در آوردن استیت از حالت پایانی
+                        finalState.InV.Add(StateCopy[i], "λ");
+                    }
+
+                State firstState = new State("first");
+                if (StateS.Count == 0) throw new Exception("mashin tohi ast");
+                firstState.OutV.Add(StateCopy[0], "λ");
+                StateCopy[0].InV.Add(firstState, "λ");
+                StateCopy.Insert(0, firstState);
+
+
+
+                while (StateCopy[1] != finalState)
+                {
+                    State temp = StateCopy[1];
+                    bool togheh = temp.OutV.ContainsKey(temp);//شامل یال طوقه باشد
+                    for (int i = 0; i < temp.InV.Count; i++)
+                    {
+                        var x = temp.InV.ElementAt(i);
+
+                        if (x.Key == temp) continue;
+
+                        x.Key.OutV.Remove(temp);
+
+                        for (int j = 0; j < temp.OutV.Count; j++)
+                        {
+                            var y = temp.OutV.ElementAt(j);
+                            if (y.Key == temp) continue;
+
+                            if (x.Key.OutV.ContainsKey(y.Key))//x -> y 
+                            {
+                                if (togheh)
+                                {
+                                    string r = x.Key.OutV[y.Key] + "+" + "(" + x.Value + ")" + "(" + temp.OutV[temp] + ")*" + y.Value;
+                                    x.Key.OutV[y.Key] = r;
+                                    y.Key.InV[x.Key] = r;
+                                }
+                                else
+                                {
+                                    string r = x.Key.OutV[y.Key] + "+" + "(" + x.Value + ")" + y.Value;
+                                    x.Key.OutV[y.Key] = r;
+                                    y.Key.InV[x.Key] = r;
+                                }
+                            }
+                            else //x -/-> y
+                            {
+                                if (togheh)
+                                {
+                                    string r = "(" + x.Value + ")" + "(" + temp.OutV[temp] + ")*" + y.Value;
+                                    x.Key.OutV.Add(y.Key, r);
+                                    y.Key.InV.Add(x.Key, r);
+                                }
+                                else
+                                {
+                                    string r = "(" + x.Value + ")" + y.Value;
+                                    x.Key.OutV.Add(y.Key, r);
+                                    y.Key.InV.Add(x.Key, r);
+                                }
+                            }
+                        }
+                    }
+                    for (int k = 0; k < temp.OutV.Count; k++)
+                    {
+                        var y = temp.OutV.ElementAt(k);
+                        y.Key.InV.Remove(temp);
+                    }
+                    StateCopy.Remove(temp);
+                }
+
+                if (firstState.OutV.ContainsKey(finalState)) Console.WriteLine(firstState.OutV[finalState]);
+                else Console.WriteLine("na motanahi");/////////////////////
+           }
+            //catch(Exception e)
+            {
+          //     Console.WriteLine(e.Message);
             }
-
-            State finalState = new State("final");
-            StateCopy.Add(finalState);
-            foreach (State x in StateCopy) if (x.NameState.isfinal()) x.OutV.Add(finalState, "λ");//در آوردن استیت از حالت پایانی
-
-            State firstState = new State("first");
-            firstState.OutV.Add(StateCopy[0], "λ");
-            StateCopy.Insert(0, firstState);
-
-
-
         }
         private void addtostack(IEnumerable s)
         {

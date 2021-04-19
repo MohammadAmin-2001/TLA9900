@@ -10,7 +10,6 @@ namespace TLA_Project
         {
 
             int i = 0;
-
             string[] States = Console.ReadLine().Split(',');
             string[] Alphabet = Console.ReadLine().Split(',');
             string[] FinalState = Console.ReadLine().Split(',');
@@ -51,6 +50,7 @@ namespace TLA_Project
                 if (state1.OutV.ContainsKey(state2))
                 {
                     state1.OutV[state2] = state1.OutV[state2] + "+" + delta[2];
+                    state2.InV[state1] = state2.InV[state1] + "+" + delta[2];
                 }
                 else
                 {
@@ -59,7 +59,7 @@ namespace TLA_Project
                 }
                 //
             }
-
+            NFA FA = new NFA();
 
         }
         static State ishere(string here)
